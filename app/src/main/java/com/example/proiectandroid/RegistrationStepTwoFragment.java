@@ -1,5 +1,6 @@
 package com.example.proiectandroid;
 
+import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,6 +11,7 @@ import android.widget.Spinner;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.AppCompatEditText;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -27,6 +29,9 @@ public class RegistrationStepTwoFragment extends Fragment {
     private String password;
     private String name;
     private String image;
+
+    private String year;
+    private String gender;
 
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -57,28 +62,63 @@ public class RegistrationStepTwoFragment extends Fragment {
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Bundle bundle = new Bundle();
-                bundle.putString("yearBorn", editYearBorn.getText().toString());
-                bundle.putString("gender", genderSpinner.getSelectedItem().toString());
-                bundle.putString("email", email);
-                bundle.putString("password", password);
-                bundle.putString("name", name);
-                bundle.putString("image", image);
+                year = "";
+                gender="";
+                if(editYearBorn.getText()!=null && genderSpinner.getSelectedItem()!=null){
+                    year = editYearBorn.getText().toString();
+                    gender = genderSpinner.getSelectedItem().toString();
 
-                RegistrationStepThreeFragment fragmentThree = new RegistrationStepThreeFragment();
-                fragmentThree.setArguments(bundle);
+                    if(year.isEmpty() || gender.isEmpty()){
+                        showErrorPopup();
+                    }
+                    else{
+                        Bundle bundle = new Bundle();
+                        bundle.putString("yearBorn", editYearBorn.getText().toString());
+                        bundle.putString("gender", genderSpinner.getSelectedItem().toString());
+                        bundle.putString("email", email);
+                        bundle.putString("password", password);
+                        bundle.putString("name", name);
+                        bundle.putString("image", image);
 
-                // Call the onNextButtonClick() method on the callback interface
+                        RegistrationStepThreeFragment fragmentThree = new RegistrationStepThreeFragment();
+                        fragmentThree.setArguments(bundle);
+
+                        // Call the onNextButtonClick() method on the callback interface
 //                if (getActivity() instanceof OnNextButtonClickListener) {
 //                    ((OnNextButtonClickListener) getActivity()).onNextButtonClickedFromF2();
 //                }
-                FragmentManager fragmentManager = getParentFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.fragment_container, fragmentThree);
-                fragmentTransaction.addToBackStack(null);
-                fragmentTransaction.commit();
+                        FragmentManager fragmentManager = getParentFragmentManager();
+                        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                        fragmentTransaction.replace(R.id.fragment_container, fragmentThree);
+                        fragmentTransaction.addToBackStack(null);
+                        fragmentTransaction.commit();
+                    }
+                }
+
+                else if(editYearBorn.getText()==null || genderSpinner.getSelectedItem()==null)
+                {
+                    showErrorPopup();
+                }
             }
         });
 }
 
+
+    private void showErrorPopup(){
+        new AlertDialog.Builder(requireContext())
+                .setTitle("Error")
+                .setMessage(R.string.error_register_F1)
+                .setPositiveButton(android.R.string.yes, dismissPopup())
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .show();
+
+    }
+    private DialogInterface.OnClickListener dismissPopup(){
+        return new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        };
+    }
 }
