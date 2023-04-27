@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/registersecondland">
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/yearBornEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="100dp"
+        android:layout_marginTop="150dp"
+        android:layout_marginRight="400dp"
+        android:layout_marginBottom="20dp"
+        android:alpha="0.7"
+        android:background="@color/white"
+        android:hint="Year Born"
+        android:inputType="number"
+        android:minHeight="48dp" />
+
+    <Spinner
+        android:id="@+id/genderSpinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:drawable/btn_dropdown"
+        android:hint="Gender"
+        android:minHeight="48dp"
+        android:layout_marginLeft="100dp"
+        android:layout_marginRight="400dp"
+        android:spinnerMode="dropdown" />
+
+    <Button
+    android:id="@+id/nextButton"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Next"
+    android:layout_below="@+id/genderSpinner"
+        android:layout_marginLeft="400dp"
+        android:layout_marginTop="50dp"/>
+
+</LinearLayout>

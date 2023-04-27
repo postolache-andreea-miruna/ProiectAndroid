@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">ProiectAndroid</string>
+    <string name="bun_venit">Welcome! </string>
+    <string name="email">Email</string>
+    <string name="pass">Pasword</string>
+    <string name="register">Register</string>
+    <string name="error_email">Email or password missing</string>
+    <string name="hi">Hi</string>
+    <string name="registration">Create Account</string>
+    <string name="login">Login</string>
+    <string name="error_register_F1">All fields must be completed</string>
+</resources>
