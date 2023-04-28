@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/registerthree">
+<!--<Button-->
+<!--    android:layout_width="wrap_content"-->
+<!--    android:layout_height="wrap_content"-->
+<!--    android:id="@+id/signout"-->
+<!--    android:text="Logout"/>-->
+
+    <TextView
+        android:id="@+id/completeRegGoogle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/registerForGoogle"
+        android:textSize="28sp"
+        android:background="@color/teal_200"
+        android:layout_gravity="center"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="200dp"
+        />
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/passwordEditTextGoogle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Password"
+        android:background="@color/teal_700"
+        android:inputType="text"
+        android:minHeight="48dp"
+        android:textColor="@color/white"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="20dp"/>
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/yearBornEditTextul"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Year Born"
+        android:background="@color/teal_700"
+        android:inputType="number"
+        android:minHeight="48dp"
+        android:textColor="@color/white"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="20dp"/>
+
+    <Spinner
+        android:id="@+id/genderSpinnerul"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@android:drawable/btn_dropdown"
+        android:hint="Gender"
+        android:minHeight="48dp"
+        android:spinnerMode="dropdown"
+        android:layout_marginBottom="20dp" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:layout_marginBottom="20dp"
+        android:id="@+id/heightEditTextul"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Height(cm)"
+        android:textColor="@color/white"
+        android:background="@color/teal_700"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:inputType="numberDecimal"
+        android:minHeight="48dp"/>
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/weightEditTextul"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@color/teal_700"
+        android:hint="Weight(kg)"
+        android:inputType="numberDecimal"
+        android:minHeight="48dp"
+        android:textColor="@color/white"
+        android:layout_marginBottom="20dp"/>
+
+    <Button
+        android:id="@+id/completeButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Complete"
+        android:layout_gravity="center_horizontal"/>
+
+</LinearLayout>

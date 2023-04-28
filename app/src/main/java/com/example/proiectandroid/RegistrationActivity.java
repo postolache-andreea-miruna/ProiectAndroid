@@ -18,10 +18,10 @@ public class RegistrationActivity extends AppCompatActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
-
+        if (savedInstanceState == null) {
         getSupportFragmentManager().beginTransaction().setReorderingAllowed(true)
                 .add(R.id.fragment_container, RegisterStepOneFragment.class,null)
-                .commit();
+                .commit();}
     }
    @Override
     public void onNextButtonClicked() {

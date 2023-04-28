@@ -5,7 +5,9 @@ import static android.app.Activity.RESULT_OK;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Base64;
@@ -44,6 +46,19 @@ public class RegisterStepOneFragment extends Fragment {
 
     private String email;
     private String image;
+
+//    @Override
+//    public void onCreate(@Nullable Bundle savedInstanceState) {
+//        super.onCreate(savedInstanceState);
+//
+//
+//        if (savedInstanceState != null) {
+//            String emailul = savedInstanceState.getString("emailul");
+//            editEmail.setText(emailul);
+//
+//        }
+//    }
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -56,7 +71,23 @@ public class RegisterStepOneFragment extends Fragment {
          editName = view.findViewById(R.id.nameEditText);
          next = view.findViewById(R.id.nextButton);
 
+        if (savedInstanceState != null) {
+            String emailul = savedInstanceState.getString("emailul");
+            editEmail.setText(emailul);
 
+            editPassword.setText(savedInstanceState.getString("parola"));
+            editName.setText(savedInstanceState.getString("numele"));
+           // profilePicture.setImageBitmap(savedInstanceState.getParcelable("imaginea"));
+
+
+           
+//            if (imageData != null) {
+//                selectedImage = BitmapFactory.decodeByteArray(imageData.getBytes(), 0, imageData.length());
+//                profilePicture.setImageBitmap(selectedImage);
+//            }
+
+
+        }
 
         next.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -101,6 +132,7 @@ public class RegisterStepOneFragment extends Fragment {
 //                        if (getActivity() instanceof OnNextButtonClickListener) {
 //                            ((OnNextButtonClickListener) getActivity()).onNextButtonClicked();
 //                        }
+
                         FragmentManager fragmentManager = getParentFragmentManager();
                         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                         fragmentTransaction.replace(R.id.fragment_container, fragmentTwo);
@@ -166,31 +198,28 @@ public class RegisterStepOneFragment extends Fragment {
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putString("emailul", editEmail.getText().toString());
-        Log.d("RegisterStepOne", "onSaveInstanceState() called with email: " + editEmail.getText().toString());
+        if(!outState.isEmpty())
+        {outState.putString("emailul", editEmail.getText().toString());
+        outState.putString("numele", editName.getText().toString());
+        outState.putString("parola", editPassword.getText().toString());}
     }
 
-
-    @Override
-    public void onViewStateRestored(@Nullable Bundle savedInstanceState) {
-        super.onViewStateRestored(savedInstanceState);
-       // Log.d("reg",savedInstanceState.getString("emailul"));
-        if (savedInstanceState != null) {
-            Log.d("RegisterStepOne","aicinotnull");
-            String emailul = savedInstanceState.getString("emailul");
-            editEmail.setText(emailul);
-            Log.d("RegisterStepOne", "onViewStateRestored() called with email: " + email);
-        }
-    }
 
 //    @Override
-//    public void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
+//    public void onViewStateRestored(@Nullable Bundle savedInstanceState) {
+//        super.onViewStateRestored(savedInstanceState);
+//       // Log.d("reg",savedInstanceState.getString("emailul"));
+//        if (savedInstanceState != null) {
 //
-//        if(savedInstanceState!=null){
-//            String editEmailul = savedInstanceState.getString("emailul");
-//            editEmail.setText(editEmailul);
+//            editName.setText(savedInstanceState.getString("numele"));
+//            editPassword.setText(savedInstanceState.getString("parola"));
+//             profilePicture.setImageBitmap(savedInstanceState.getParcelable("imaginea"));
+//            //selectedImage.
+//            //savedInstanceState.getString("imaginea");
+//            String emailul = savedInstanceState.getString("emailul");
+//            editEmail.setText(emailul);
 //        }
 //    }
+
 
 }

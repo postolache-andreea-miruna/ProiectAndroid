@@ -25,4 +25,10 @@ public interface UserDao {
 
     @Query("SELECT * FROM user WHERE name LIKE :search LIMIT 1")
     User findUserWithName(String search);
+
+    @Query("SELECT EXISTS (SELECT * from user where password=:password AND email=:email)")
+    Integer login(String email, String password);
+
+    @Query("SELECT EXISTS (SELECT * from user where email=:email)")
+    Integer existGoogleAccount(String email);
 }

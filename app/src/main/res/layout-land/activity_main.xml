@@ -9,18 +9,18 @@
         android:id="@+id/bunVenit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/bun_venit"
-        android:textSize="42sp"
         android:layout_gravity="center"
-        android:layout_marginTop="100dp"
-        android:layout_marginBottom="100dp"
-        />
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="5dp"
+        android:text="@string/bun_venit"
+        android:textSize="32sp" />
 
     <androidx.appcompat.widget.AppCompatEditText
         android:id="@+id/editEmail"
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:layout_margin="20dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
         android:hint="@string/email"
         android:inputType="text"
         android:textColor="@color/black"
@@ -30,18 +30,23 @@
         android:id="@+id/editPass"
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:layout_margin="20dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
         android:hint="@string/pass"
         android:inputType="textPassword"
         android:textColor="@color/black"
         android:textSize="14sp" />
-
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:gravity="center_horizontal">
     <Button
         android:id="@+id/button"
         android:layout_width="160dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="30dp"
+        android:layout_marginRight="60dp"
         android:backgroundTint="@color/teal_200"
         android:text="@string/login"
         />
@@ -58,8 +63,9 @@
         android:layout_width="160dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="30dp"
+        android:layout_marginLeft="80dp"
         android:backgroundTint="@color/teal_200"
         android:text="Not have an account?"
         />
+</LinearLayout>
 </LinearLayout>
