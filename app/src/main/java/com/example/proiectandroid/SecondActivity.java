@@ -6,10 +6,15 @@ import static com.example.proiectandroid.MainActivity.PREFERENCES_KEY;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.MediaController;
 import android.widget.TextView;
+import android.widget.VideoView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,6 +27,13 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 
 public class SecondActivity extends AppCompatActivity {
+
+
+    private VideoView videoView;
+    private MediaController mediaController;
+    private LinearLayout videoLayout;
+
+
     GoogleSignInOptions gso;
     GoogleSignInClient gsc;
     Button signout;
@@ -32,6 +44,18 @@ public class SecondActivity extends AppCompatActivity {
 
         //facem legatura cu layout
         setContentView(R.layout.activity_second);
+
+        videoView = findViewById(R.id.video_view);
+        Uri uri = Uri.parse("android.resource://" + getPackageName() + "/raw/my_video");
+        videoView.setVideoURI(uri);
+        MediaController mediaController = new MediaController(this);
+        mediaController.setAnchorView(videoView);
+        videoView.setMediaController(mediaController);
+
+        videoView.start();
+
+
+
 //        Intent intent = getIntent();
 //
 //        Bundle bundle = intent.getExtras();

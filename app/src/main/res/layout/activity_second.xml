@@ -11,11 +11,19 @@
         android:text="Logout"/>
     <TextView
         android:id="@+id/mesaj2"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:gravity="center"
         android:textSize="30sp"
         android:text="@string/hi"
         />
+    <VideoView
+
+        android:id="@+id/video_view"
+        android:layout_width="wrap_content"
+        android:layout_height="200dp"
+
+        />
+
 
 </LinearLayout>

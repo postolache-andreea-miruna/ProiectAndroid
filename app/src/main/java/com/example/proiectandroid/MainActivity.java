@@ -3,6 +3,7 @@ package com.example.proiectandroid;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
@@ -24,6 +25,23 @@ import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
 
 public class MainActivity extends AppCompatActivity implements  UserOperationLogin,UserOperationLoginGoogle{
+    private BroadCastReceiverPlane airplaneModeChangeReceiver;
+
+
+/*
+    @Override
+    protected void onResume() {
+        super.onResume();
+        IntentFilter filter = new IntentFilter(Intent.ACTION_AIRPLANE_MODE_CHANGED);
+        registerReceiver(airplaneModeChangeReceiver, filter);
+    }
+*/
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(airplaneModeChangeReceiver);
+    }
 
     GoogleSignInOptions gso;
     GoogleSignInClient gsc;
@@ -46,6 +64,12 @@ public class MainActivity extends AppCompatActivity implements  UserOperationLog
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);//imi ia layoultul
+
+
+        airplaneModeChangeReceiver = new BroadCastReceiverPlane();
+        IntentFilter filter = new IntentFilter(Intent.ACTION_AIRPLANE_MODE_CHANGED);
+        registerReceiver(airplaneModeChangeReceiver, filter);
+
 
         gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
         gsc = GoogleSignIn.getClient(this,gso);
