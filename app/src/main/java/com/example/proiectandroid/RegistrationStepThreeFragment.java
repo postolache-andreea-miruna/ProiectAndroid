@@ -1,8 +1,13 @@
 package com.example.proiectandroid;
 
 import android.app.Activity;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.app.TaskStackBuilder;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -13,12 +18,15 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.AppCompatEditText;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.fragment.app.Fragment;
 
 public class RegistrationStepThreeFragment extends Fragment implements UserOperations{
     public RegistrationStepThreeFragment(){
         super(R.layout.fragment_registration_step_three);
     }
+    private static String NOTIFICATION_CHANEL_ID = "My channel";
     private AppCompatEditText editHeight;
     private AppCompatEditText editWeight;
     private Button register;
@@ -78,7 +86,11 @@ public class RegistrationStepThreeFragment extends Fragment implements UserOpera
                         Log.d("name", "name: " + name);
                         Log.d("image", "image: " + image);
 
+                        addNotification();
+
                         insertCurrentUser(height,weight);
+
+
                     }
                 }
                 else if(editHeight.getText()==null || editWeight.getText() == null){
@@ -97,6 +109,35 @@ public class RegistrationStepThreeFragment extends Fragment implements UserOpera
 //                }
             }
         });
+    }
+
+    private void addNotification(){
+        int id=1;
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel channel = new NotificationChannel(NOTIFICATION_CHANEL_ID,"channel",importance);
+            channel.setDescription("Login Here");
+            NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(getActivity().getApplicationContext());
+//            NotificationManager notificationManager =requireActivity().getSystemService(NotificationManager.class );
+            notificationManagerCompat.createNotificationChannel(channel);
+        }
+        Intent intent = new Intent(getContext(), MainActivity.class);
+        TaskStackBuilder stackBuilder = TaskStackBuilder.create(getContext());
+        stackBuilder.addNextIntentWithParentStack(intent);
+        PendingIntent resultPendingIntent =
+                stackBuilder.getPendingIntent(0,
+                        PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
+
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(getContext(),NOTIFICATION_CHANEL_ID)
+                .setSmallIcon(R.drawable.ic_launcher_foreground)
+                .setContentTitle("Notification")
+                .setContentText("Welcome! Don't forget to login.")
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                .setContentIntent(resultPendingIntent);
+
+
+        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(getContext());
+        notificationManager.notify(id, builder.build());
     }
 
     @Override
