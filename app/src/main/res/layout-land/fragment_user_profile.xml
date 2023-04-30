@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/profile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="My profile"
+        android:textSize="28sp"
+        android:layout_gravity="center"
+        />
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+        <ImageView
+            android:id="@+id/profile_ImageView"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginRight="30dp"
+            android:src="@drawable/initialprofilepic" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
+                <TextView
+                    android:id="@+id/name_typo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Name: "
+                    android:textSize="18sp"
+                    android:layout_marginBottom="10dp"
+                    />
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/profile_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="UserName"
+                    android:minHeight="48dp"
+                    android:textColor="@color/black" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
+                <TextView
+                    android:id="@+id/weight_typo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Weight(kg): "
+                    android:textSize="18sp"
+                    android:layout_marginBottom="10dp"
+                    />
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/profile_weight"
+                    android:layout_height="wrap_content"
+                    android:text="Weight"
+                    android:minHeight="48dp"
+                    android:textColor="@color/black"
+                    android:layout_width="wrap_content"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
+                <TextView
+                    android:id="@+id/height_typo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Height(cm): "
+                    android:textSize="18sp"
+                    android:layout_marginBottom="10dp"
+                    />
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/profile_height"
+                    android:layout_height="wrap_content"
+                    android:text="Height"
+                    android:minHeight="48dp"
+                    android:textColor="@color/black"
+                    android:layout_width="wrap_content"/>
+            </LinearLayout>
+
+        </LinearLayout>
+        <Button
+            android:id="@+id/profile_edit_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:layout_marginLeft="20dp"
+            android:text="Edit"
+            />
+    </LinearLayout>
+    <!-- Placeholder image for initial display -->
+
+
+
+</LinearLayout>

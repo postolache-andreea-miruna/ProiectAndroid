@@ -28,4 +28,7 @@ public interface ChooseDao {
             "(SELECT id FROM user WHERE user.email =:emailUser)")
     List<MyProgramsModel> getMyProgramsList(String emailUser);
 
+    @Query("UPDATE choose SET dateFinish =:finishDate WHERE idProgram=:idProgram AND idUser = (SELECT id FROM user WHERE user.email =:emailUser)")
+    void updateChooseByEmail(String emailUser,int idProgram, Date finishDate);
+
 }

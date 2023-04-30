@@ -34,4 +34,12 @@ public interface UserDao {
 
     @Query("SELECT id from user where email=:email")
     Integer idFromEmail(String email);
+
+
+    @Query("SELECT name,profilePicture,weight,height from user where email=:email")
+    GetUserByEmailModel getUserByEmail(String email);
+
+    @Query("UPDATE USER SET weight =:userWeight,height =:userHeight,name =:name where email=:email")
+    void updateUserByEmail(String email,float userWeight, float userHeight, String name);
+
 }

@@ -5,6 +5,7 @@ import static com.example.proiectandroid.MainActivity.PREFERENCES_KEY;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.text.SimpleDateFormat;
@@ -44,7 +48,7 @@ public class CustomAdapterMyPrograms extends RecyclerView.Adapter<CustomAdapterM
     }
 
 
-    public static class MyProgramsViewHolder extends RecyclerView.ViewHolder{
+    public static class MyProgramsViewHolder extends RecyclerView.ViewHolder implements ChooseUpdateFinishDate{
 
         private final TextView name;
         private final TextView no_days;
@@ -53,6 +57,9 @@ public class CustomAdapterMyPrograms extends RecyclerView.Adapter<CustomAdapterM
         private final TextView finishDate;
 
         private Button selectButton;
+
+        private Button finishButton;
+
 
         private int userId;
         private Choose choose;
@@ -69,9 +76,9 @@ public class CustomAdapterMyPrograms extends RecyclerView.Adapter<CustomAdapterM
             finishDate = itemView.findViewById(R.id.my_finish_date);
 
             selectButton = itemView.findViewById(R.id.myselectButton);
+            finishButton = itemView.findViewById(R.id.myFinishButton);
 
         }
-
 
         public void bind(MyProgramsModel item){
             //setam datele in view
@@ -94,7 +101,7 @@ public class CustomAdapterMyPrograms extends RecyclerView.Adapter<CustomAdapterM
                 Date date = item.getDateFinish();
                 SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
                 String strDate = formatter.format(date);
-                finishDate.setText(strDate);
+                finishDate.setText("-"+strDate);
             }
 
             Date date = item.getDateStart();
@@ -111,9 +118,52 @@ public class CustomAdapterMyPrograms extends RecyclerView.Adapter<CustomAdapterM
                     SharedPreferences preferences = context.getSharedPreferences(PREFERENCES_KEY, Context.MODE_PRIVATE);
                     String emailUser = preferences.getString(PREFERENCES_ID_KEY,"");
                     //cand dau cllick vreau sa ma duc in alta activitate dar cu niste date deja luate
+
+                    Bundle bundle = new Bundle();
+                    bundle.putInt("ProgramId",item.getIdProgram());
+                    TrainingForProgramIdFragment fragment = new TrainingForProgramIdFragment();
+                    fragment.setArguments(bundle);
+                    // Call the onNextButtonClick() method on the callback interface
+                    FragmentManager fragmentManager = ((SecondActivity)context).getSupportFragmentManager();
+                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                    fragmentTransaction.replace(R.id.fragment_containeruul, fragment);
+                    fragmentTransaction.addToBackStack(null);
+                    fragmentTransaction.commit();
                 }
             });
 
+            finishButton.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View v){
+                    //cand dam click vrem sa se insereze in choose
+                    Context context = v.getContext();
+                    SharedPreferences preferences = context.getSharedPreferences(PREFERENCES_KEY, Context.MODE_PRIVATE);
+                    String emailUser = preferences.getString(PREFERENCES_ID_KEY,"");
+
+                    finishProgram(emailUser,item.getIdProgram());
+
+
+                }
+            });
+
+        }
+
+        public void finishProgram(String emailUser, int idProgram){
+            ModelChooseFinishUpd model = new ModelChooseFinishUpd();
+            model.emailUser = emailUser;
+            model.idProgram = idProgram;
+            new AsyncTaskUpdateChooseFinish(this).execute(model);
+        }
+
+        @Override
+        public void updateFinishDate(String result) {
+            if(result.equals("success")){
+                Toast.makeText(selectButton.getContext(), "Update successfully",Toast.LENGTH_LONG).show();
+
+            }
+            else{
+                Toast.makeText(selectButton.getContext(), "Problem with update",Toast.LENGTH_LONG).show();
+            }
         }
     }
 }

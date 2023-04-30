@@ -145,9 +145,7 @@ public class SecondActivity extends AppCompatActivity implements NavigationView.
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.fragment_containeruul, new AboutFragment())
                     .commit();
-        } else if (id == R.id.nav_logout) {
-            Toast.makeText(this, "Logout!", Toast.LENGTH_LONG).show();
-        } else if (id == R.id.nav_home) {
+        }  else if (id == R.id.nav_home) {
             ShowAllGenderProgramsFragment fragment = new ShowAllGenderProgramsFragment();
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.fragment_containeruul, fragment)
@@ -158,6 +156,12 @@ public class SecondActivity extends AppCompatActivity implements NavigationView.
         }
         else if(id == R.id.nav_my_programs){
             MyProgramsFragment fragment = new MyProgramsFragment();
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.fragment_containeruul, fragment)
+                    .commit();
+        }
+        else if(id == R.id.nav_profile){
+            UserProfileFragment fragment = new UserProfileFragment();
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.fragment_containeruul, fragment)
                     .commit();

@@ -197,10 +197,12 @@ protected void onStart() {
     private void goToRegister(){//sa mergem pe act urm cand apas pe buton
         Intent intent = new Intent(this,RegistrationActivity.class);
         startActivity(intent);
+        overridePendingTransition(R.anim.slide_in_right_custom, R.anim.slide_out_left_custom);
     }
     private void goToSecActiv(){//sa mergem pe act urm cand apas pe buton
         Intent intent = new Intent(this,SecondActivity.class);
         startActivity(intent);
+        overridePendingTransition(R.anim.slide_in_right_custom, R.anim.slide_out_left_custom);
     }
     private void showErrorPopup(){
         new AlertDialog.Builder(this)

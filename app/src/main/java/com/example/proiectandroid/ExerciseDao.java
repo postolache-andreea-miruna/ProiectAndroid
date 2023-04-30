@@ -19,4 +19,7 @@ public interface ExerciseDao {
 
     @Query("SELECT * FROM exercise")
     List<Exercise> getExercises();
+
+    @Query("SELECT description FROM exercise WHERE id =:idEx")
+    String getDetailForExerciseId(int idEx);
 }

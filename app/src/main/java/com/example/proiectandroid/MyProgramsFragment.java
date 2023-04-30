@@ -12,6 +12,7 @@ import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -34,9 +35,15 @@ public class MyProgramsFragment extends Fragment implements MyProgramOperation{
         SharedPreferences preferences = context.getSharedPreferences(PREFERENCES_KEY, Context.MODE_PRIVATE);
         emailUser = preferences.getString(PREFERENCES_ID_KEY,"");
 
-        new GetAllMyProgramsOperation(this).execute(emailUser);
 
+
+
+
+        new GetAllMyProgramsOperation(this).execute(emailUser);
+        FragmentManager fragmentManager = getParentFragmentManager();
         adapterMyPrograms = new CustomAdapterMyPrograms(programsList);
+
+      //  adapterMyPrograms = new CustomAdapterMyPrograms(programsList);
         //folosim in recyclerView acest adapter
         rv = view.findViewById(R.id.my_program_recycler_view);
         rv.setAdapter(adapterMyPrograms);
