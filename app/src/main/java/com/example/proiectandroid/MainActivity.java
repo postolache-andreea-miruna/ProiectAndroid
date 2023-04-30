@@ -58,7 +58,19 @@ public class MainActivity extends AppCompatActivity implements  UserOperationLog
     private String emailUser;
 
     private String email;
+    private String emailRead;
+@Override
+protected void onStart() {
+    super.onStart();
+    Context context = getApplicationContext();
+    SharedPreferences preferences = context.getSharedPreferences(PREFERENCES_KEY,Context.MODE_PRIVATE);
+    emailRead = preferences.getString(PREFERENCES_ID_KEY,"");//valoarea default
 
+    if(!emailRead.equals("")){
+        Intent i = new Intent(MainActivity.this,SecondActivity.class);
+        startActivity(i);
+    }
+}
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -218,14 +230,14 @@ public class MainActivity extends AppCompatActivity implements  UserOperationLog
     }
     private void makePreferences(String emailUser){
         Context context = getApplicationContext();
-        SharedPreferences preferences = getSharedPreferences(PREFERENCES_KEY,Context.MODE_PRIVATE);
+        SharedPreferences preferences = context.getSharedPreferences(PREFERENCES_KEY,Context.MODE_PRIVATE);
 
         SharedPreferences.Editor editor = preferences.edit();//incepem o sesiune
 
-        editor.putString(PREFERENCES_ID_KEY,emailUser);
+        editor.putString(PREFERENCES_ID_KEY,emailUser).commit();
         editor.apply();//pentru salvare
 
-        String emailRead = preferences.getString(PREFERENCES_ID_KEY,"");//valoarea default
+        emailRead = preferences.getString(PREFERENCES_ID_KEY,"");//valoarea default
         Toast.makeText(context,emailRead,Toast.LENGTH_LONG).show();
     }
 
@@ -233,6 +245,8 @@ public class MainActivity extends AppCompatActivity implements  UserOperationLog
     @Override
     public void userHasAccount(Integer result) {
         if(result == 1){
+
+            //salvez sesiunea
             makePreferences(emailUser);
             goToSecActiv();
         }

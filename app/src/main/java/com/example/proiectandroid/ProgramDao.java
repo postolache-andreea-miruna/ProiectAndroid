@@ -20,5 +20,5 @@ public interface ProgramDao {
     void deleteProgram(Program program);
 
     @Query("SELECT * FROM program")
-    List<Program> getPrograms();
+    List<ProgramModel> getPrograms();
 }

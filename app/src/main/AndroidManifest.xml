@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
-<uses-permission android:name="android.permission.INTERNET"/>
+    xmlns:tools="http://schemas.android.com/tools" >
+
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
     <application
-
         android:name=".MyApplication"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -16,21 +16,24 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ProiectAndroid"
         tools:targetApi="31" >
-
-        <activity android:name=".MainActivity"
-            android:exported="true">
+        <activity
+            android:name=".MainActivity"
+            android:exported="true" >
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".SecondActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+        <activity android:name=".RegistrationActivity" />
+        <activity android:name=".GoogleRegistrationActivity" />
 
-        <activity android:name=".SecondActivity"/>
-        <activity android:name=".RegistrationActivity"/>
-        <activity android:name=".GoogleRegistrationActivity"/>
-        <receiver android:name=".BroadCastReceiverPlane"
+        <receiver
+            android:name=".BroadCastReceiverPlane"
             android:enabled="true"
-            android:exported="true">
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.AIRPLANE_MODE" />
             </intent-filter>

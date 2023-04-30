@@ -31,4 +31,7 @@ public interface UserDao {
 
     @Query("SELECT EXISTS (SELECT * from user where email=:email)")
     Integer existGoogleAccount(String email);
+
+    @Query("SELECT id from user where email=:email")
+    Integer idFromEmail(String email);
 }
